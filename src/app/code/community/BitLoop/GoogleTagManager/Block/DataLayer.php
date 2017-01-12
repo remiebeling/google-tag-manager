@@ -15,7 +15,7 @@ class BitLoop_GoogleTagManager_Block_DataLayer
      * @var array
      */
     protected $_dataLayer;
-
+            
     /**
      * We want this block to be cached based on the parameters.
      * If any of the parameters in the data layer changes, we want to serve
@@ -54,6 +54,10 @@ class BitLoop_GoogleTagManager_Block_DataLayer
         if ($_magentoContextData = $this->_getMagentoContextData()) {
             $_dataLayer = array_merge($_dataLayer, $_magentoContextData);
         }
+        //Add Dynamic remarketing Data
+        if($_remarketingdata = $this->_getRemarketingData()){
+            $_dataLayer = array_merge($_dataLayer, $_remarketingdata);
+        }   
 
         // Add the Category page data if enabled
         if ($_categoryData = $this->_getCategoryPageData()) {
@@ -69,6 +73,7 @@ class BitLoop_GoogleTagManager_Block_DataLayer
         if ($_transactionData = $this->_getOrderSuccessPageData()) {
             $_dataLayer = array_merge($_dataLayer, $_transactionData);
         }
+        
 
         // Cache the data layer array agains the class
         $this->_dataLayer = $_dataLayer;
@@ -153,7 +158,7 @@ class BitLoop_GoogleTagManager_Block_DataLayer
 
     /**
      * Get the product page data. Will return false if we are not on the
-     * product page
+     * product pageproduct
      *
      * @return bool|array
      */
@@ -169,6 +174,18 @@ class BitLoop_GoogleTagManager_Block_DataLayer
             return $_productBlock->getDataLayer();
         }
 
+        return false;
+    }
+    
+    protected function _getRemarketingData()
+    {
+        if($this->_getConfig()->isRemarketingEnabled() 
+            && $_remarketingBlock = $this->getChild('bl_gtm_dl_remarketing')) 
+        {
+            //Zend_Debug::dump($_remarketingBlock->getDataLayer()); 
+            return $_remarketingBlock->getDataLayer();
+        }
+        
         return false;
     }
 

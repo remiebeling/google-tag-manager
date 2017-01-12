@@ -80,4 +80,32 @@ class BitLoop_GoogleTagManager_Block_DataLayer_OrderSuccess
 
         return array();
     }
+    
+    /**
+     * Get the product data for the dataLayer array
+     *
+     * @return array
+     * @SuppressWarnings(PHPMD)
+     */
+    public function getDataLayer()
+    {
+        $_data = parent::getDataLayer();
+        $int = array('transactionId');
+        $float = array('transactionTotal', 'transactionShipping', 'transactionTax');
+        
+        foreach ($int as $_int)
+        {
+            if (isset($_data[$_int]))
+            {
+                $_data[$_int] = (int) $_data[$_int];
+            }
+        }
+        foreach ($float as $_float)
+        {
+            if (isset($_data[$_float]))
+            {
+                $_data[$_float] = (float) $_data[$_float];
+            }
+        }
+    }
 }

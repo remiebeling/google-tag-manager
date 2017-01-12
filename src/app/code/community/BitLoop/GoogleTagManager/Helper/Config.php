@@ -30,6 +30,9 @@ class BitLoop_GoogleTagManager_Helper_Config extends BitLoop_Core_Helper_Data
         'bitloop_googletagmanager/data_layer/product_page';
     const CONFIG_DATA_LAYER_ORDER_TRANSACTION_DATA =
         'bitloop_googletagmanager/data_layer/order_success';
+    
+    const CONFIG_DATA_LAYER_REMARKETING_DATA = 
+            'bitloop_googletagmanager/data_layer/remarketing';
 
     /**
      * Check if Google Tag Manager is enabled
@@ -111,6 +114,13 @@ class BitLoop_GoogleTagManager_Helper_Config extends BitLoop_Core_Helper_Data
     {
         return (bool) Mage::getStoreConfig(
             self::CONFIG_DATA_LAYER_ORDER_TRANSACTION_DATA
+        );
+    }
+    
+    public function isRemarketingEnabled()
+    {
+        return (bool) Mage::getStoreConfigFlag(
+            self::CONFIG_DATA_LAYER_REMARKETING_DATA
         );
     }
 }

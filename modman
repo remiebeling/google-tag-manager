@@ -1,0 +1,6 @@
+src/app/code/community/BitLoop/Core                                                 app/code/community/BitLoop/Core
+src/app/etc/modules/BitLoop_Core.xml                                                app/etc/modules/BitLoop_Core.xml    
+src/app/code/community/BitLoop/GoogleTagManager                                     app/code/community/BitLoop/GoogleTagManager
+src/app/design/frontend/base/default/layout/bitloop/googletagmanager.xml            app/design/frontend/base/default/layout/bitloop/googletagmanager.xml
+src/app/design/frontend/base/default/template/bitloop/googletagmanager              app/design/frontend/base/default/template/bitloop/googletagmanager
+src/app/etc/modules/BitLoop_GoogleTagManager.xml                                    app/etc/modules/BitLoop_GoogleTagManager.xml

@@ -37,6 +37,18 @@ abstract class BitLoop_GoogleTagManager_Block_DataLayer_Abstract
      * @var array
      */
     protected $_entityAttributes = array();
+    
+    /**
+     * Keys to Typecast as int
+     * @var array 
+     */
+    protected $_int = array('transactionId');
+    
+    /**
+     * Keys to Typecast as float
+     * @var array 
+     */
+    protected $_float = array('transactionTotal', 'transactionShipping', 'transactionTax', 'ecomm_totalvalue');
 
     /**
      * Get the product data for the dataLayer array
@@ -72,7 +84,18 @@ abstract class BitLoop_GoogleTagManager_Block_DataLayer_Abstract
                 if ($_attribute
                     && $_attributeData = $_entityInstance->getData($_attribute)
                 ) {
-                    $_data[$_gtmCode] = $_attributeData;
+                    if(in_array($_gtmCode, $this->_int))
+                    {
+                        $_data[$_gtmCode] = (int) $_attributeData;
+                    }
+                    else if(in_array($_gtmCode, $this->_float))
+                    {
+                        $_data[$_gtmCode] = (float) $_attributeData;
+                    }
+                    else
+                    {
+                        $_data[$_gtmCode] = $_attributeData;
+                    }
                 }
             }
 
